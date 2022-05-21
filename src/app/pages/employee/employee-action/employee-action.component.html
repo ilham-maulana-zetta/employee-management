@@ -22,8 +22,9 @@
             <input type="number" formControlName="basicSalary" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan besaran gaji pokok">
             <p class="text-right flex items-center justify-end">Status</p>
             <mat-select formControlName="status" class="font-poppins col-span-2 h-10 bg-gray-100 text-sm rounded-md p-3" placeholder="Pilih Status">
-                <mat-option class="font-poppins">Pegawai Tetap</mat-option>
-                <mat-option class="font-poppins">Pegawai Kontrak</mat-option>
+                <mat-option value="tetap" class="font-poppins">Pegawai Tetap</mat-option>
+                <mat-option value="kontrak" class="font-poppins">Pegawai Kontrak</mat-option>
+                <mat-option value="magang" class="font-poppins">Pegawai Magang</mat-option>
             </mat-select>
             <p class="text-right flex items-center justify-end">Grup</p>
             <input type="text" formControlName="group" [matAutocomplete]="auto" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
@@ -31,10 +32,10 @@
                 <mat-option *ngFor="let item of groupList" [value]="item.value" class="font-poppins">{{item.key}}</mat-option>
               </mat-autocomplete>
             <p class="text-right flex items-center justify-end">Deskripsi</p>
-            <input type="text" formControlName="description" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
+            <input type="date" formControlName="description" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
             <div class="col-span-3 flex items-center justify-end space-x-2">
-                <button class="py-2 px-3 bg-white border border-blue-900 rounded-md text-sm font-semibold text-blue-900">Batalkan</button>
-                <button class="py-2 px-3 bg-blue-900 rounded-md text-sm font-semibold text-white">Simpan</button>
+                <button (click)="cancel()" class="py-2 px-3 bg-white border border-blue-900 rounded-md text-sm font-semibold text-blue-900">Batalkan</button>
+                <button (click)="save()" class="py-2 px-3 bg-blue-900 rounded-md text-sm font-semibold text-white">Simpan</button>
             </div>
         </form>
     </div>

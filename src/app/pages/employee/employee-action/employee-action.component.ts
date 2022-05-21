@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Employee } from 'src/app/service/employee';
+import { EmployeeService } from 'src/app/service/employee.service';
 
 @Component({
   selector: 'app-employee-action',
@@ -10,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EmployeeActionComponent implements OnInit {
 
   form: FormGroup
+  employee: Employee
 
   groupList = [
     { value: 'corporate', key: 'Corporate Strategy' },
@@ -28,10 +32,14 @@ export class EmployeeActionComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private service: EmployeeService,
+    private snackbar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.getData()
     this.initForm()
   }
 
@@ -46,6 +54,40 @@ export class EmployeeActionComponent implements OnInit {
       status: [null, Validators.required],
       group: [null, Validators.required],
       description: [null, Validators.required]
+    })
+  }
+
+  getData() {
+    this.service.getDataById(this.activatedRoute.snapshot.queryParams['id']).subscribe((result) => {
+      this.employee = result
+      this.form.patchValue(this.employee)
+    })
+  }
+
+  save() {
+    if (this.activatedRoute.snapshot.queryParams['m'] === 'add') {
+      this.service.insert(this.form.value).subscribe((result) => {
+        if (result) {
+          this.snackbar.open('Data berhasil ditambahkan', 'Tutup', {duration: 5000})
+          this.router.navigate(['./employee'])
+        }
+      })      
+    } 
+    else {
+      this.service.update(this.activatedRoute.snapshot.queryParams['id'], this.form.value).subscribe((result) => {
+        if (result) {
+          this.snackbar.open('Data berhasil diperbarui', 'Tutup', {duration: 5000})
+          this.router.navigate(['./employee'])
+        }
+      })
+    }
+  }
+
+  cancel() {
+    this.router.navigate(['employee'], {
+      state: {
+        search: history.state.search
+      }
     })
   }
 

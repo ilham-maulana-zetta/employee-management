@@ -1,0 +1,12 @@
+<h1 mat-dialog-title class="font-poppins text-black font-medium">
+  {{title}}
+</h1>
+    
+<div mat-dialog-content class="font-poppins text-black">
+  <p>{{message}}</p>
+</div>
+    
+<div mat-dialog-actions class="mt-4 flex justify-end items-center">
+  <button (click)="onDismiss()" class="font-poppins text-blue-900 border border-blue-900 text-xs font-medium px-4 py-3 rounded-md">Batalkan</button>
+  <button (click)="onConfirm()" class="ml-2 font-poppins text-white border border-blue-900 bg-blue-900 font-medium text-xs px-4 py-3 rounded-md">Ya, Saya Yakin</button>
+</div>

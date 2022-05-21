@@ -1,5 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialogComponent } from 'src/app/component/confirm-dialog/confirm-dialog.component';
+import { Employee } from 'src/app/service/employee';
+import { EmployeeService } from 'src/app/service/employee.service';
 
 export interface PeriodicElement {
   name: string;
@@ -26,17 +35,45 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss']
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'username', 'email', 'birthDate', 'basicSalary', 'status', 'group', 'description', 'action'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['no', 'name', 'username', 'email', 'birthDate', 'basicSalary', 'status', 'group', 'description', 'action'];
+  dataSource: any;
+
+  employee: Employee[];
+  searchForm: FormGroup;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private service: EmployeeService,
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
+    this.initSearchForm();
+    if (history.state.search) {
+      this.searchForm.get('search')?.setValue(history.state.search)
+    }
+    this.getData(this.searchForm.get('search')?.value)
+  }
+
+  initSearchForm() {
+    this.searchForm = this.fb.group({
+      search: [null, Validators.required]
+    })
+  }
+
+  ngAfterViewInit() {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   addEmployee() {
@@ -46,6 +83,56 @@ export class EmployeeComponent implements OnInit {
         m: 'add',
       },
     });
+  }
+
+  editEmployee(id: any) {
+    this.router.navigate(['./action'], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        m: 'edit',
+        id: id
+      },
+    });
+  }
+
+  deleteEmployee(id: any) {
+    this.dialog.open(ConfirmDialogComponent, {
+      panelClass: 'danger-dialog',
+      autoFocus: false,
+      width: '420px',
+      disableClose: true,
+    })
+    .afterClosed().subscribe((result) => {
+      if (result) {
+        this.service.delete(id).subscribe((result) => {
+          if (result) {
+            this.snackbar.open('Data berhasil dihapus', 'Tutup', {duration: 5000})
+          }
+        })
+      }
+    })
+  }
+
+  getData(search?: any) {
+    this.service.getData(search).subscribe((result: any) => {
+      this.employee = result
+      this.dataSource = new MatTableDataSource<Employee>(this.employee)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+  }
+
+  search(event: any) {
+    this.getData(event.target.value)
+  }
+
+  viewDetail(id: any) {
+    this.router.navigate(['action'], {
+      relativeTo: this.activatedRoute,
+      state: {
+        search: this.searchForm.get('search')?.value
+      }
+    })
   }
 
 }

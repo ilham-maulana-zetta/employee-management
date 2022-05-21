@@ -1,12 +1,10 @@
 <header class="w-full font-poppins bg-white text-gray-600 body-font border-b border-gray-100">
     <div class="mx-6 flex justify-between py-4 items-center">
-        <div>
-            <a routerLink="/" class="flex font-medium items-center text-gray-900">
-                <div class="md:ml-5 ml-3">
-                    <p class="md:text-xl text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-blue-900">Employee Management</p>
-                </div>
-            </a>
-        </div>
+        <a routerLink="/employee" class="flex font-medium items-center text-gray-900">
+            <div class="md:ml-5 ml-3">
+                <p class="md:text-xl text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-blue-900">Employee Management</p>
+            </div>
+        </a>
         <div>   
             <nav class="flex flex-wrap items-center justify-center text-sm">
                 <button [matMenuTriggerFor]="menu" class="inline-block font-poppins text-sm text-black focus:outline-none">
