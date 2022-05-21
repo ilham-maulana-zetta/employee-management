@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<section class="bg-gray-100 p-10 font-poppins">
+    <div class="py-5 px-6 bg-blue-900 rounded-md flex justify-between items-center shadow-lg">
+        <div class="flex flex-row items-center justify-center">
+            <p class="font-display text-white text-xl font-semibold">{{this.activatedRoute.snapshot.queryParams['m'] === 'add' ? 'Tambah' : 'Edit'}} Data Karyawan</p>
+        </div>
+    </div>
+    <div class="bg-white rounded-md p-8 mt-4 shadow-lg flex justify-center">
+        <form [formGroup]="form" class="grid grid-cols-3 gap-x-10 gap-y-8 w-1/2">
+            <p class="text-right flex items-center justify-end">Nama Lengkap</p>
+            <div class="col-span-2 grid grid-cols-2 gap-4">
+                <input type="text" formControlName="firstName" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama depan">
+                <input type="text" formControlName="lastName" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama belakang">
+            </div>
+            <p class="text-right flex items-center justify-end">Username</p>
+            <input type="text" formControlName="username" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan username">
+            <p class="text-right flex items-center justify-end">Email</p>
+            <input type="text" formControlName="email" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan alamat email">
+            <p class="text-right flex items-center justify-end">Tanggal Lahir</p>
+            <input type="date" formControlName="birthDate" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan tanggal lahir">
+            <p class="text-right flex items-center justify-end">Gaji Pokok</p>
+            <input type="number" formControlName="basicSalary" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan besaran gaji pokok">
+            <p class="text-right flex items-center justify-end">Status</p>
+            <mat-select formControlName="status" class="font-poppins col-span-2 h-10 bg-gray-100 text-sm rounded-md p-3" placeholder="Pilih Status">
+                <mat-option class="font-poppins">Pegawai Tetap</mat-option>
+                <mat-option class="font-poppins">Pegawai Kontrak</mat-option>
+            </mat-select>
+            <p class="text-right flex items-center justify-end">Grup</p>
+            <input type="text" formControlName="group" [matAutocomplete]="auto" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let item of groupList" [value]="item.value" class="font-poppins">{{item.key}}</mat-option>
+              </mat-autocomplete>
+            <p class="text-right flex items-center justify-end">Deskripsi</p>
+            <input type="text" formControlName="description" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
+            <div class="col-span-3 flex items-center justify-end space-x-2">
+                <button class="py-2 px-3 bg-white border border-blue-900 rounded-md text-sm font-semibold text-blue-900">Batalkan</button>
+                <button class="py-2 px-3 bg-blue-900 rounded-md text-sm font-semibold text-white">Simpan</button>
+            </div>
+        </form>
+    </div>
+</section>
