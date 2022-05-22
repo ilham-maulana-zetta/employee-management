@@ -13,4 +13,4 @@ Untuk fake API menggunaka JSON Server (https://www.npmjs.com/package/json-server
 6. Masuk direktori repo tersebut pada local anda menggunakan CLI.
 7. Lakukan instalasi module npm dengan cara "npm install" pada CLI.
 8. Setelah selesai, run Angular project nya dengan cara "ng serve --open".
-9. Aplikasi siap digunakan, untuk credential login menggunakan "ilhambalcazar14@gmail.com" dengan password "123456".
+9. Aplikasi siap digunakan, untuk credential login menggunakan "mail@gmail.com" dengan password "123456".
