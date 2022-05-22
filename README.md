@@ -1,27 +1,16 @@
 # EmployeeManagement
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+Mini projek ini di develop menggunakan Angular Versi 13.2.5, Angular Material, dan TailwindCSS V3.
+Untuk fake API menggunaka JSON Server (https://www.npmjs.com/package/json-server).
 
-## Development server
+## Cara untuk menjalankan aplikasi ini
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Lakukan setup untuk json-server nya terlebih dahulu dengan cara "npm install -g json-server".
+2. Kemudian lakukan clone repo ini (https://github.com/ilham-maulana-zetta/employee-server) pada local komputer anda.
+3. Setelah selesai, masuk ke direktori repo tersebut menggunakan CLI.
+4. Kemudian lakukan run json-server nya dengan cara "json-server --watch db.json".
+5. Untuk setup Angular project nya, clone repo ini terlebih dahulu (https://github.com/ilham-maulana-zetta/employee-management) pada local komputer anda.
+6. Masuk direktori repo tersebut pada local anda menggunakan CLI.
+7. Lakukan instalasi module npm dengan cara "npm install" pada CLI.
+8. Setelah selesai, run Angular project nya dengan cara "ng serve --open".
+9. Aplikasi siap digunakan.
