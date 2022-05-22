@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.loginForm.get('email')?.value === 'ilhambalcazar14@gmail.com' && this.loginForm.get('password')?.value === '123456') {
+    if (this.loginForm.get('email')?.value === 'mail@gmail.com' && this.loginForm.get('password')?.value === '123456') {
       localStorage.setItem('auth', 'yes');
       this.router.navigate(['./employee'])
     } else {
