@@ -47,10 +47,11 @@ export class EmployeeActionComponent implements OnInit {
     if (localStorage.getItem('auth') !== 'yes') {
       this.router.navigate(['./login']);
       this.snackbar.open('Anda harus login terlebih dahulu', 'Tutup', {duration: 5000})
+    } else {
+      this.getData()
+      this.initForm()
+      this.selectedGroup = this.groupList
     }
-    this.getData()
-    this.initForm()
-    this.selectedGroup = this.groupList
   }
 
   initForm() {

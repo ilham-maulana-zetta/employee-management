@@ -59,12 +59,13 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('auth') !== 'yes') {
       this.router.navigate(['./login']);
       this.snackbar.open('Anda harus login terlebih dahulu', 'Tutup', {duration: 5000})
+    } else {
+      this.initSearchForm();
+      if (history.state.search) {
+        this.searchForm.get('search')?.setValue(history.state.search)
+      }
+      this.getData(this.searchForm.get('search')?.value)
     }
-    this.initSearchForm();
-    if (history.state.search) {
-      this.searchForm.get('search')?.setValue(history.state.search)
-    }
-    this.getData(this.searchForm.get('search')?.value)
   }
 
   initSearchForm() {

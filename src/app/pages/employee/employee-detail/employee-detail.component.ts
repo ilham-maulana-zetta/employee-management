@@ -24,8 +24,9 @@ export class EmployeeDetailComponent implements OnInit {
     if (localStorage.getItem('auth') !== 'yes') {
       this.router.navigate(['./login']);
       this.snackbar.open('Anda harus login terlebih dahulu', 'Tutup', {duration: 5000})
+    } else {
+      this.getData()
     }
-    this.getData()
   }
 
   getData() {

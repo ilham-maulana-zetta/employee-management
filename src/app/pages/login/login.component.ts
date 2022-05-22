@@ -21,8 +21,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('auth') === 'yes') {
       this.router.navigate(['./employee']);
+    } else {
+      this.initForm()
     }
-    this.initForm()
   }
 
   initForm() {
