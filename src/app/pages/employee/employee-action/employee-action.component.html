@@ -28,7 +28,7 @@
                 </div>
                 <p class="text-right flex items-center justify-end">Email</p>
                 <div class="col-span-2">
-                    <input type="text" formControlName="email" class="w-full h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan alamat email" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('email')?.hasError('required') && form.get('email')?.touched)}">
+                    <input type="text" formControlName="email" class="w-full h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan alamat email" [ngClass]="{ 'ring-1 ring-red-500' : ((form.get('email')?.hasError('required') || form.get('email')?.hasError('pattern')) && form.get('email')?.touched)}">
                     <div class="w-full flex items-center">
                         <p class="text-red-500 text-xs" *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">Email tidak boleh kosong</p>
                         <p class="text-red-500 text-xs" *ngIf="form.get('email')?.hasError('pattern') && form.get('email')?.touched">Email tidak valid</p>
