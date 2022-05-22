@@ -3,3 +3,11 @@ td.mat-cell,
 td.mat-footer-cell {
   padding: 10px;
 }
+
+::ng-deep .delete {
+    background-color: #8f1d1d;
+}
+
+.height-content {
+    min-height: calc(100vh - 65px);
+}

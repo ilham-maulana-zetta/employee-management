@@ -1,42 +1,86 @@
-<app-navbar></app-navbar>
-<section class="bg-gray-100 p-10 font-poppins">
-    <div class="py-5 px-6 bg-blue-900 rounded-md flex justify-between items-center shadow-lg">
-        <div class="flex flex-row items-center justify-center">
-            <p class="font-display text-white text-xl font-semibold">{{this.activatedRoute.snapshot.queryParams['m'] === 'add' ? 'Tambah' : 'Edit'}} Data Karyawan</p>
+<div class="relative">
+    <app-navbar class="fixed w-full z-20"></app-navbar>
+    <section class="min-h-screen bg-gray-100 px-10 pt-20 pb-6  font-poppins">
+        <app-page-title [title]="this.activatedRoute.snapshot.queryParams['m'] === 'add' ? 'Tambah Data Karyawan' : 'Edit Data Karyawan'"></app-page-title>
+        <div class="bg-white rounded-md p-8 mt-4 shadow-lg flex justify-center">
+            <form [formGroup]="form" class="grid grid-cols-3 gap-x-10 gap-y-8 w-full lg:w-1/2">
+                <p class="text-right flex items-center justify-end">Nama Lengkap</p>
+                <div class="col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" formControlName="firstName" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1 w-full" placeholder="Masukkan nama depan" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('firstName')?.hasError('required') && form.get('firstName')?.touched)}">
+                        <div class="w-full flex items-center">
+                            <p class="text-red-500 text-xs" *ngIf="form.get('firstName')?.hasError('required') && form.get('firstName')?.touched">Nama depan tidak boleh kosong</p>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" formControlName="lastName" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1 w-full" placeholder="Masukkan nama belakang" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('lastName')?.hasError('required') && form.get('lastName')?.touched)}">
+                        <div class="w-full flex items-center">
+                            <p class="text-red-500 text-xs" *ngIf="form.get('lastName')?.hasError('required') && form.get('lastName')?.touched">Nama belakang tidak boleh kosong</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Username</p>
+                <div class="col-span-2">
+                    <input type="text" formControlName="username" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1 w-full" placeholder="Masukkan username" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('username')?.hasError('required') && form.get('username')?.touched)}">
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched">Username tidak boleh kosong</p>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Email</p>
+                <div class="col-span-2">
+                    <input type="text" formControlName="email" class="w-full h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan alamat email" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('email')?.hasError('required') && form.get('email')?.touched)}">
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">Email tidak boleh kosong</p>
+                        <p class="text-red-500 text-xs" *ngIf="form.get('email')?.hasError('pattern') && form.get('email')?.touched">Email tidak valid</p>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Tanggal Lahir</p>
+                <div class="col-span-2">
+                    <input type="date" [max]="todayDate" formControlName="birthDate" class="w-full h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan tanggal lahir" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('birthDate')?.hasError('required') && form.get('birthDate')?.touched)}">
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('birthDate')?.hasError('required') && form.get('birthDate')?.touched">Tanggal lahir tidak boleh kosong</p>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Gaji Pokok</p>
+                <div class="col-span-2">
+                    <input type="number" formControlName="basicSalary" class="w-full h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan besaran gaji pokok" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('basicSalary')?.hasError('required') && form.get('basicSalary')?.touched)}">
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('basicSalary')?.hasError('required') && form.get('basicSalary')?.touched">Gaji pokok tidak boleh kosong</p>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Status</p>
+                <div class="col-span-2">
+                    <mat-select formControlName="status" class="font-poppins w-full h-10 bg-gray-100 text-sm rounded-md p-3" placeholder="Pilih Status" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('status')?.hasError('required') && form.get('status')?.touched)}">
+                        <mat-option value="tetap" class="font-poppins">Pegawai Tetap</mat-option>
+                        <mat-option value="kontrak" class="font-poppins">Pegawai Kontrak</mat-option>
+                        <mat-option value="magang" class="font-poppins">Pegawai Magang</mat-option>
+                    </mat-select>
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('status')?.hasError('required') && form.get('status')?.touched">Status tidak boleh kosong</p>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Grup</p>
+                <div class="col-span-2">
+                    <mat-select formControlName="group" class="font-poppins w-full h-10 bg-gray-100 text-sm rounded-md p-3" placeholder="Masukkan nama grup" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('group')?.hasError('required') && form.get('group')?.touched)}">
+                        <input (keyup)="searchGroup($event)" class="font-poppins w-full p-4" placeholder="Ketik Nama Grup disini...">
+                        <mat-option *ngFor="let group of selectedGroup" [value]="group.value" class="font-poppins">{{group.key}}</mat-option>
+                    </mat-select>
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('group')?.hasError('required') && form.get('group')?.touched">Grup tidak boleh kosong</p>
+                    </div>
+                </div>
+                <p class="text-right flex items-center justify-end">Deskripsi</p>
+                <div class="col-span-2">
+                    <input type="date" formControlName="description" class="w-full h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama" [ngClass]="{ 'ring-1 ring-red-500' : (form.get('description')?.hasError('required') && form.get('description')?.touched)}">
+                    <div class="w-full flex items-center">
+                        <p class="text-red-500 text-xs" *ngIf="form.get('description')?.hasError('required') && form.get('description')?.touched">Deskripsi tidak boleh kosong</p>
+                    </div>
+                </div>
+                <div class="col-span-3 flex items-center justify-end space-x-2">
+                    <button (click)="cancel()" class="py-2 px-3 bg-white border border-blue-900 rounded-md text-sm font-semibold text-blue-900">Batalkan</button>
+                    <button (click)="save()" class="py-2 px-3 bg-blue-900 rounded-md text-sm font-semibold text-white">Simpan</button>
+                </div>
+            </form>
         </div>
-    </div>
-    <div class="bg-white rounded-md p-8 mt-4 shadow-lg flex justify-center">
-        <form [formGroup]="form" class="grid grid-cols-3 gap-x-10 gap-y-8 w-1/2">
-            <p class="text-right flex items-center justify-end">Nama Lengkap</p>
-            <div class="col-span-2 grid grid-cols-2 gap-4">
-                <input type="text" formControlName="firstName" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama depan">
-                <input type="text" formControlName="lastName" class="h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama belakang">
-            </div>
-            <p class="text-right flex items-center justify-end">Username</p>
-            <input type="text" formControlName="username" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan username">
-            <p class="text-right flex items-center justify-end">Email</p>
-            <input type="text" formControlName="email" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan alamat email">
-            <p class="text-right flex items-center justify-end">Tanggal Lahir</p>
-            <input type="date" formControlName="birthDate" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan tanggal lahir">
-            <p class="text-right flex items-center justify-end">Gaji Pokok</p>
-            <input type="number" formControlName="basicSalary" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan besaran gaji pokok">
-            <p class="text-right flex items-center justify-end">Status</p>
-            <mat-select formControlName="status" class="font-poppins col-span-2 h-10 bg-gray-100 text-sm rounded-md p-3" placeholder="Pilih Status">
-                <mat-option value="tetap" class="font-poppins">Pegawai Tetap</mat-option>
-                <mat-option value="kontrak" class="font-poppins">Pegawai Kontrak</mat-option>
-                <mat-option value="magang" class="font-poppins">Pegawai Magang</mat-option>
-            </mat-select>
-            <p class="text-right flex items-center justify-end">Grup</p>
-            <input type="text" formControlName="group" [matAutocomplete]="auto" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let item of groupList" [value]="item.value" class="font-poppins">{{item.key}}</mat-option>
-              </mat-autocomplete>
-            <p class="text-right flex items-center justify-end">Deskripsi</p>
-            <input type="date" formControlName="description" class="col-span-2 h-10 bg-gray-100 text-sm rounded-md px-3 py-1" placeholder="Masukkan nama">
-            <div class="col-span-3 flex items-center justify-end space-x-2">
-                <button (click)="cancel()" class="py-2 px-3 bg-white border border-blue-900 rounded-md text-sm font-semibold text-blue-900">Batalkan</button>
-                <button (click)="save()" class="py-2 px-3 bg-blue-900 rounded-md text-sm font-semibold text-white">Simpan</button>
-            </div>
-        </form>
-    </div>
-</section>
+    </section>
+</div>

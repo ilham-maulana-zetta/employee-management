@@ -1,1 +1,58 @@
-<p>employee-detail works!</p>
+<div class="relative">
+    <app-navbar class="fixed w-full z-20"></app-navbar>
+    <section class="min-h-screen bg-gray-100 px-10 pt-20 pb-6 font-poppins">
+        <app-page-title [title]="'Detail Data Karyawan'"></app-page-title>
+        <div class="bg-white rounded-md p-8 mt-4 shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-x-4 gap-y-8">
+                <div>
+                    <p class="text-sm text-gray-900">Nama Lengkap</p>
+                    <p class="mt-1 text-2xl font-semibold text-gray-900">{{employee.firstName}} {{employee.lastName}}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Username</p>
+                    <p class="mt-1 text-2xl font-semibold text-gray-900">{{employee.username}}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Email</p>
+                    <p class="mt-1 text-2xl font-semibold text-gray-900">{{employee.email}}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Tanggal Lahir</p>
+                    <p class="mt-1 text-2xl font-semibold text-gray-900">{{employee.birthDate | date: 'longDate'}}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Gaji Pokok</p>
+                    <p class="mt-1 text-2xl font-semibold text-gray-900">{{employee.basicSalary | currency: 'IDR'}}</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Status</p>
+                    <p *ngIf="employee.status === 'tetap'" class="mt-1 text-2xl font-semibold text-gray-900">Pegawai Tetap</p>
+                    <p *ngIf="employee.status === 'kontrak'" class="mt-1 text-2xl font-semibold text-gray-900">Pegawai Kontrak</p>
+                    <p *ngIf="employee.status === 'magang'" class="mt-1 text-2xl font-semibold text-gray-900">Pegawai Magang</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Grup</p>
+                    <p *ngIf="employee.group === 'corporate'" class="mt-1 text-2xl font-semibold text-gray-900">Corporate Strategy</p>
+                    <p *ngIf="employee.group === 'internship'" class="mt-1 text-2xl font-semibold text-gray-900">Internship</p>
+                    <p *ngIf="employee.group === 'operations'" class="mt-1 text-2xl font-semibold text-gray-900">Operations</p>
+                    <p *ngIf="employee.group === 'technology'" class="mt-1 text-2xl font-semibold text-gray-900">Technology</p>
+                    <p *ngIf="employee.group === 'product'" class="mt-1 text-2xl font-semibold text-gray-900">Product</p>
+                    <p *ngIf="employee.group === 'data'" class="mt-1 text-2xl font-semibold text-gray-900">Data</p>
+                    <p *ngIf="employee.group === 'finance'" class="mt-1 text-2xl font-semibold text-gray-900">Finance & Accounting</p>
+                    <p *ngIf="employee.group === 'people'" class="mt-1 text-2xl font-semibold text-gray-900">People</p>
+                    <p *ngIf="employee.group === 'care'" class="mt-1 text-2xl font-semibold text-gray-900">Customer Care</p>
+                    <p *ngIf="employee.group === 'marketing'" class="mt-1 text-2xl font-semibold text-gray-900">Marketing</p>
+                    <p *ngIf="employee.group === 'commercial'" class="mt-1 text-2xl font-semibold text-gray-900">Commercial</p>
+                    <p *ngIf="employee.group === 'legal'" class="mt-1 text-2xl font-semibold text-gray-900">Legal & Internal Control</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-900">Deskripsi</p>
+                    <p class="mt-1 text-2xl font-semibold text-gray-900">{{employee.description | date: 'shortDate'}}</p>
+                </div>
+                <div class="xl:col-span-4 lg:col-span-2 col-span-1 flex justify-end">
+                    <button (click)="backToList()" class="py-2 px-3 bg-blue-900 rounded-md text-sm font-semibold text-white">Oke</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

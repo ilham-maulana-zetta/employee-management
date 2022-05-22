@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +31,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.get('email')?.value === 'ilhambalcazar14@gmail.com' && this.loginForm.get('password')?.value === '123456') {
+      localStorage.setItem('auth', 'yes');
       this.router.navigate(['./employee'])
+    } else {
+      this.snackbar.open('Email/Password yang dimasukkan salah', 'Tutup', {duration: 5000})
     }
   }
 

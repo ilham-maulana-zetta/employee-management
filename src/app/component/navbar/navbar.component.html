@@ -2,7 +2,7 @@
     <div class="mx-6 flex justify-between py-4 items-center">
         <a routerLink="/employee" class="flex font-medium items-center text-gray-900">
             <div class="md:ml-5 ml-3">
-                <p class="md:text-xl text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-blue-900">Employee Management</p>
+                <p class="md:text-xl text-lg font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-900">Employee Management</p>
             </div>
         </a>
         <div>   
@@ -11,7 +11,7 @@
                     <img class="rounded-full w-8 inline mr-2 md:mr-4" src="assets/avatar.png" alt=""><span class="hidden md:inline">M. Ilham Maulana</span>
                     <svg class="md:ml-2 inline w-5 h-5 text-gray-400 pointer-events-none" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     <mat-menu #menu="matMenu" class="outline-none">
-                        <button mat-menu-item class="w-full font-poppins focus:outline-none"><i class="fas fa-sign-out-alt text-black mr-4"></i>Sign Out</button>
+                        <button (click)="signOut()" mat-menu-item class="w-full font-poppins focus:outline-none"><i class="fas fa-sign-out-alt text-black mr-4"></i>Sign Out</button>
                     </mat-menu>
                 </button>
             </nav>

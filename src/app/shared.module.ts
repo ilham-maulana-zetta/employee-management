@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PageTitleModule } from './component/page-title/page-title.module';
 
 @NgModule({
   exports: [
@@ -20,7 +21,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSelectModule,
     MatAutocompleteModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    PageTitleModule
   ]
 })
 export class SharedModule { }

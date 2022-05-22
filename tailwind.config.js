@@ -8,7 +8,7 @@ module.exports = {
         poppins: ['Poppins', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'login' : "url('/assets/login.jpg')",
+        'login' : "url('/assets/login.webp')",
       }
     },
   },

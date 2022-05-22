@@ -56,6 +56,10 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('auth') !== 'yes') {
+      this.router.navigate(['./login']);
+      this.snackbar.open('Anda harus login terlebih dahulu', 'Tutup', {duration: 5000})
+    }
     this.initSearchForm();
     if (history.state.search) {
       this.searchForm.get('search')?.setValue(history.state.search)
@@ -106,7 +110,8 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
       if (result) {
         this.service.delete(id).subscribe((result) => {
           if (result) {
-            this.snackbar.open('Data berhasil dihapus', 'Tutup', {duration: 5000})
+            this.snackbar.open('Data berhasil dihapus', 'Tutup', {duration: 5000, panelClass: "delete"})
+            this.getData()
           }
         })
       }
@@ -127,8 +132,11 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   }
 
   viewDetail(id: any) {
-    this.router.navigate(['action'], {
+    this.router.navigate(['detail'], {
       relativeTo: this.activatedRoute,
+      queryParams: {
+        id: id
+      },
       state: {
         search: this.searchForm.get('search')?.value
       }
